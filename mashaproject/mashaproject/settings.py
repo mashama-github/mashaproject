@@ -83,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mashmaproject',
-        'USER': 'mashma@localhost',
-        'PASSWORD': 'mashma',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         
     }
