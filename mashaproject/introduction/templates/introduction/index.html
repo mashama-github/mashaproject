@@ -1,0 +1,81 @@
+{% extends 'base.html'%} {%block body %}
+
+
+ 
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            什麼是股票
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+            <li>股票（英語：stock share）是一種有價證券，是股份公司為籌集資金發給投資者作為公司資本部分所有權的憑證，成為股東以此獲得股息（股利），並分享公司成長或交易市場波動帶來的利潤；但也要共同承擔公司運作錯誤所帶來的風險。</li>
+            <br>
+                <li>按股東權利，可分為普通股、特別股。</li>
+                <br>
+                <li>按交易方式，可分為上市股票（集中市場交易）、上櫃股票（櫃檯買賣交易）、興櫃股票（即將上市上櫃股票）、未上市上櫃股票。</li>
+            
+            </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            上市股票
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+            <span>在集中市場進行交易的被稱為上市股票；在店頭市場進行交易的稱為上櫃股票；上市上櫃祇能二選一。在台灣的股票市場除了大家所常聽聞的集中市場與店頭市場外，還有興櫃市場與未上市交易市場。 </span>
+            <span>公司透過股票上市櫃,得以增加籌資管道,投資人也可以透過此管道參予投資公司. 上市櫃必須先經過一些審查程序,符合標準審查通過才得以公開募集與掛牌.同樣,若有符合終止上市櫃規定,也可能會下市櫃。</span>
+            <span>上市股票指已經公開發行，並於集中市場以開掛牌買賣的股票，公司申請上市須符合以下條件：</span>
+            <ul><li>設立年限：設立達三個會計年度(成立三年以上) </li>
+            <li>資本額：實收資本額達新台幣六億元以上者申請股票上市之發行公司，經中央目的事業主管機關出具其係屬科技事業之明確意見書，實收資本額達新台幣三億元以上 </li>
+            <li>獲利能力︰最近一年內不能有虧損，且符合底下其中之一的條件:
+                <ul>                 
+                <li>最近二個會計年度營業利益及稅前純益占年度決算之財務報告所列示股本比率，均達百分之六以上者，或最近二個會計年度平均達百分之六以上，且最近一個會計年度之獲利能力較前一會計年度為佳者。</li>
+                <li>最近五個會計年度營業利益及稅前純益占年度決算之財務報告所列示股本比率，均達百分之三以上者。</li>
+                <li>股權分散：記名股東人數在一千人以上，其中持有股份一千股至五萬股之股東人數不少於五百人，且其所持股份合計占發行股份總額百分之二十以上或滿一千萬股者。</li>
+            </ul></li></ul>
+            <span>其他有關持股規定參考 臺灣證券交易所股份有限公司有價證券上市審查準則第4條 申請股票上市之發行公司條件。</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            如何購買股票
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <ul>
+              <li>開證券戶(2個帳戶):證券集保戶 --- 股票進出用(上面登記所有以後買賣股票的紀錄，是以「股」為單位)、證券買賣交割銀行帳戶 --- 資金進出用(買賣股票撥款的專款專用的銀行帳戶)</li>
+              <li>成功後就可匯錢到交割銀行購買股票，目前在台灣買進股票，2天後才會從銀行扣款</li>    
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{%endblock%} 
+
+{% block script %} 
+
+
+<script>
+
+  </script>
+{% endblock %}

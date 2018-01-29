@@ -1,0 +1,28 @@
+
+{% extends 'base.html'%}
+{% block static %}
+
+{% endblock  %}
+
+{%block body %}
+<p>    此網頁  專門收集上市公司股票資訊</p>
+<p>    投資一定有風險，股票投資有賺有賠，入站前請詳閱免責說明書。</p>
+<p></p>
+
+<div>
+    <img src='../../static/images/indexima.jpg'>
+</div>
+
+
+{%endblock%} 
+
+{% block script %} 
+<script>
+        $(document).ready(function(){
+        
+            alert("本網站所提供資訊僅供參考，並無任何推介買賣之意，投資人應自行承擔交易風險。");
+          
+          })
+          
+          </script>
+{% endblock %}

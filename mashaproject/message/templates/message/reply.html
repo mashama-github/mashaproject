@@ -1,0 +1,106 @@
+{% extends "base.html" %} {% block body %}
+
+<table class="table table-dark" id="tableorignal">
+        <thead>
+            <tr>         
+                <th>作者</th>
+                <th>主題內容-{{posted.topic}}</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr> 
+                <td>{{posted.messenger}} 於 {{posted.postdate | date:'Y/mm/d H:i'}} </td>
+                <td>{{posted.content}}</td>
+            </tr>
+        </tbody>
+</table>
+
+
+
+<table class="table table-striped" id="tabledisre">
+        <thead>
+            <tr>  
+                <th>#</th>       
+                <th>回復者</th>
+                <th>Re:{{posted.topic}}</th>
+                
+            </tr>
+
+        </thead>
+        {% for repost in reposts%}
+        <tbody>
+            <tr> 
+                <td></td>
+                <td>{{repost.reply}} 於 {{repost.repostdate | date:'Y/m/d H:i'}} </td>
+                <td>{{repost.recontent}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+</table>
+
+
+
+{% if request.COOKIES.name %} 
+<form method="post">
+{% csrf_token %}
+<table class="tablere" id="tableore">
+
+    <div class="form-group row">
+        <label for="modelnumber" class="col-sm-2 col-form-label">Reply Name</label>
+        <div class="col-sm-10">
+             
+            <select id="replynameid" name="replynameidname" class="form-control">                                   
+                <option>{{replyname}}</option>             
+            </select>  
+        
+        </div>
+    </div>
+
+    <div class="form-group row">
+            <label for="modelnumber" class="col-sm-2 col-form-label">Reply Topic</label>
+            
+        <div class="col-sm-10">
+            <select id="replynameid" name="newrretopicname" class="form-control">
+                    <option>Re:{{posted.topic}}</option>
+            </select>  
+        </div>
+    </div>
+
+    
+    <div class="form-group row">
+        <label for="description" class="col-sm-2 col-form-label">回復內容</label>
+            <div class="col-sm-10">
+            <textarea id="redescription" name="newrrecontentname" class="form-control" rows="10"></textarea>
+            
+        </div>
+    </div>
+    <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">我要回復</button>
+            </div>
+    </div>
+    {% else %}
+    <hr>
+    <div class="form-group row"> 
+            <div class="col-sm-10">
+    <span >要回復請先登入</span> 
+        </div>  
+    </div>
+    {% endif %}   
+</table>
+</form>
+
+
+{% endblock %}
+
+
+{% block script %}   
+<script>
+   for(var i =0;i<{{lengthz}}+2;i++)
+   {    j = i+2; 
+       $("tr:eq("+j+")>td:eq(0)").text('第'+i+'樓');
+   }
+
+</script>
+{% endblock %}

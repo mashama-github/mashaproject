@@ -1,0 +1,73 @@
+{% extends 'base.html'%} {%block body %}
+
+<form  method="post">
+{% csrf_token %}    
+<div>
+<input typ="text" name="stock1" id="stockid" placeholder="請輸入股票代號">
+<button type="submit"  name="buttonname" id="buttonid">確定</button>
+</div>
+</form>
+
+<table class="table table-bordered mt-3 mb-3" id="tableid" >  
+    <thead>
+      <tr>
+        
+        <th colspan="4" class="text-center" id="comidd">{{ plr10603.comstocknum}}{{ plr10603.ccompanyname}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">營業收入(百萬元)</td>
+        <td id="codeidd">{{ plr10603.comrev}}</td>
+        <td scope="row">毛利率(%)</td>
+        <td id="nameidd">{{ plr10603.comgp}}</td>
+      </tr>
+      <tr>
+        <td scope="row">營業利益率</td>
+        <td id="codeidd">{{ plr10603.comnp}}</td>
+        <td scope="row">稅前純益率</td>
+        <td id="nameidd">{{ plr10603.comnbt}}</td>
+      </tr>
+      <tr>
+        <td scope="row">稅後純益率</td>
+        <td id="codeidd">{{ plr10603.comnat}}</td>
+        
+        <form method="post">
+          {% csrf_token %} 
+        <td scope="row"colspan="2">
+          <i class="fa fa-shopping-cart" aria-hidden="true" id="cartid"></i>
+            {% if request.COOKIES.name %}
+            <input type="checkbox" name='cart' value="{{infosnum.comstocknum}}"> 
+            追蹤股票
+            <input type="submit" id='linktotracksubmit' name="addtotrack" value="submit">
+            <!-- <a class="btn btn-info mr-2" id='linktotrack'>確定</a> -->
+          {% else %} 
+          <a href="{% url 'member:login'%}">login後可加入追蹤清單</a>
+          {% endif %}
+
+      </td> </form>   
+      </tr>
+    </tbody>
+  </table>
+
+
+
+{%endblock%} 
+
+
+
+
+
+
+{% block script %}
+<script>
+     $(document).ready(function () {
+      {% if  plr10603.comstocknum == null %}
+      $('#tableid').hide();
+      {% endif %}
+    
+    
+    
+    })
+</script>   
+{% endblock %}

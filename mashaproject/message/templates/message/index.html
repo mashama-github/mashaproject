@@ -1,0 +1,98 @@
+{% extends "base.html" %} {% block body %}
+
+
+<a class="btn btn-primary mb-3" href="{% url 'message:createmessage'%}">新增討論主題</a>
+
+
+<table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                
+
+                <th>#</th>             
+                <th>主題</th>
+                <th>原po</th>
+                <th>原po日期</th>
+                <th>回復數</th>
+                <th>最近回復者</th>
+                <th>最近回復日期</th>
+
+            </tr>
+        </thead>
+        <tbody>
+           {% for post in posts%}
+     
+            <tr>
+                
+                
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url "message:reply" post.id  %}">{{post.topic}}</a></td>
+                <td>{{post.messenger}}</td>
+                <td>{{post.postdate | date:'Y/m/d H:i'}}</td>
+                <td >
+                {% for i in  reposts%}                   
+                   
+                {% if  i.articleid_id == post.id %}
+                <span >i</span>          
+                {%endif%}
+
+            {%endfor%}</td>
+
+
+                <td >
+                {% for i in  reposts%}                   
+                   
+                    {% if  i.articleid_id == post.id %}
+                    <span >{{i.reply}}</span>          
+                    {%endif%}
+
+                {%endfor%}</td>
+                <td>
+                        {% for i in  reposts%}                   
+                   
+                        {% if  i.articleid_id == post.id %}
+                        <span >{{i.repostdate | date:'Y/m/d H:i'}}</span>          
+                        {%endif%}
+    
+                    {%endfor%}
+
+
+                </td>
+
+ 
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+
+{% block script %}   
+<script>
+$(document).ready(function(){
+
+
+
+    for(var i =0;i<{{length}};i++) {
+        j = i+1;        
+        $("tr:eq("+j+")>td:eq(5) span").hide();
+        $("tr:eq("+j+")>td:eq(5) span:last-child").show();
+        $("tr:eq("+j+")>td:eq(6) span").hide();
+        $("tr:eq("+j+")>td:eq(6) span:last-child").show();
+        
+        var n=$("tr:eq("+j+")>td:eq(6) span").length
+        $("tr:eq("+j+")>td:eq(4)").text(n);
+    
+    
+    }
+    
+
+
+
+})
+
+</script>
+{% endblock %}

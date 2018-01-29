@@ -1,0 +1,38 @@
+<div class="container p-0 bg-light mt-3">
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="{% url 'home:index'%}">首頁</a>
+     
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">簡介</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'intro:index'%}">股票</a>
+        <a class="dropdown-item" href="{% url 'intro:ratio'%}">財務比率介紹</a>
+        <!-- <a class="btn btn-danger" href="{% url 'intro:link'%}">外部網站</a> -->
+      </div>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">個股</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'stock:stockinfo'%}">公司介紹</a>
+          <a class="dropdown-item" href="{% url 'stock:stockfinancial'%}">財報資訊</a>
+          <a class="dropdown-item" href="{% url 'stock:stockprice'%}">股價訊息</a>
+        </div>
+      </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="{% url 'compare:index'%}">股票比較</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'message:index'%}">討論區</a>
+    </li>
+   
+    <!-- <li class="nav-item ">
+      <a class="btn btn-danger" href="#">再來一個跳出來提示股票號碼的視窗</a>
+   </li> -->
+  
+  </ul>
+</div>

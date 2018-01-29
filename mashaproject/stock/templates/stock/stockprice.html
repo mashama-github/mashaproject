@@ -1,0 +1,66 @@
+{% extends 'base.html'%} {%block body %}
+
+<form   method="post">
+{% csrf_token %}    
+<div>
+<input typ="text" name="stock1" id="stockid" placeholder="請輸入股票代號">
+<select id="idSelectYear" name="syear"></select>
+<select id="idSelectMonth" name="smonth"></select>
+<button type="submit"  name="buttonname" id="buttonid">確定</button>
+</div>
+</form>
+<h2>{{infosnum.comstocknum}}{{infosnum.ccompanyname}}</h2>
+
+<!-- <h2>{{httpstockpriceall}}{{infosnum.comstocknum}}</h2> -->
+<div class="embed-responsive embed-responsive-1by1" id="divid">
+<iframe class="embed-responsive-item" src="{{httpstockpriceall}}{{infosnum.comstocknum}}" width"1000px" height="800px" style="border:0" allowfullscreen></iframe>
+</div>
+<form method="post">
+  {% csrf_token %} 
+<tr>
+  <td scope="row" colspan="4">
+      <i class="fa fa-shopping-cart" aria-hidden="true" id="cartid"></i>
+        {% if request.COOKIES.name %}
+        <input type="checkbox" name='cart' value={{infosnum.comstocknum}}> 
+        追蹤股票
+        <input type="submit" id='linktotracksubmit' name="addtotrack" value="submit">
+        <!-- <a class="btn btn-info mr-2" id='linktotrack'>確定</a> -->
+      {% else %} 
+      <a href="{% url 'member:login'%}">login後可加入追蹤清單</a>
+      {% endif %}
+
+  </td>
+</tr> </form>  
+
+
+
+{%endblock%} 
+
+{% block script %}   
+<script>
+
+ function addYearMonth(){
+ for (i = 2010; i <= 2020; i++) {   //新增年 
+     var opt = window.document.createElement("option");  //<option></option>
+     opt.setAttribute("value",i);
+      var optTxt=document.createTextNode(i);
+     opt.appendChild(optTxt);
+     document.getElementById('idSelectYear').appendChild(opt);
+     }
+                
+ for (j = 1; j <= 12; j++) {   //新增月 
+      var opt = window.document.createElement("option");  //<option></option>
+        opt.setAttribute("value",j);
+       var optTxt=document.createTextNode(j);
+      opt.appendChild(optTxt);  //<option value=i>i</option>
+       document.getElementById('idSelectMonth').appendChild(opt);                    
+    }}
+    addYearMonth()
+
+    $(document).ready(function () {
+      {% if  infosnum.comstocknum == null %}
+      $('#divid').hide();
+      {% endif %}
+    })
+</script>
+{% endblock %}

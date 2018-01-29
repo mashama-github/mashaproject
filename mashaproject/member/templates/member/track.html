@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block body %}
+
+
+<table class="table table-striped ">
+        <thead>
+            <tr>
+                
+                <!-- <th>姓名</th>
+                <th>電子郵件</th> -->
+                <!-- <th>ID</th> -->
+                <th>股票號碼</th>
+                <th>股票名稱</th>
+                <!-- <th>目前eps(???)</th> -->
+                <th>取消</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for track in tracks1%}
+            <tr>
+                <!-- <td>{{track.username}}</td>
+                <td>{{track.useremail}}</td> -->
+                <!-- <td>{{track.id}}</td> -->
+                <td>{{track.trackednumber}}</td>
+                <td>{{track.trackedconame}}</td>
+                <!-- <td> </td> -->
+                <td>
+                     <a href="{% url 'member:deletetrack' track.id %}"  class="btn btn-danger">取消追蹤</a>
+                    
+                </td>   
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

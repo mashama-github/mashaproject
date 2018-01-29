@@ -1,0 +1,87 @@
+{% extends 'base.html'%} {%block body %}
+
+<form method="POST">
+{% csrf_token %}    
+<div>
+<input typ="text" name="stock1" id="stockid" placeholder="請輸入股票代號">
+<button type="submit" id="buttonid" name="selectstock">確定</button>
+</div>
+</form>
+
+
+<table class="table table-bordered mt-3 mb-3" id="tableid" >
+    <thead>
+      <tr>
+        
+        <th colspan="4" class="text-center" id="comidd">{{infosnum.comstocknum}}{{infosnum.ccompanyname}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">統一編號</th>
+        <td id="codeidd">{{infosnum.comcode}}</td>
+        <th scope="row">負責人</th>
+        <td id="nameidd">{{infosnum.comceo}}</td>
+      </tr>
+      <tr>
+        <th scope="row">設立日期</th>
+        <td id="setidd">{{infosnum.comset}}</td>
+        <th scope="row">上市日期</th>
+        <td id="onidd">{{infosnum.comontwse}}</td>
+      </tr>
+      <tr>
+        <th scope="row">地址</th>
+        <td colspan="3" id="addidd">{{infosnum.comaddress}}</td>           
+      </tr>
+      <tr>
+        <th scope="row">行業別</th>
+        <td id="industryidd">{{infoclasnum.companyclass}}</td>  
+        <th scope="row">電話</th>
+        <td id="phoneidd">{{infosnum.comphone}}</td>           
+      </tr>
+      <tr>
+        <th scope="row">網址</th>
+        <td colspan="3" id="httpidd">
+          <a href={{httpcom}} target="_blank">{{infosnum.comhttp}}</a> 
+          </td>           
+      </tr>
+      <form method="post">
+          {% csrf_token %} 
+      <tr>
+          <td scope="row" colspan="4">
+              <i class="fa fa-shopping-cart" aria-hidden="true" id="cartid"></i>
+                {% if request.COOKIES.name %}
+                <input type="checkbox" name='cart' value={{infosnum.comstocknum}}> 
+                追蹤股票
+                <input type="submit" id='linktotracksubmit' name="addtotrack" value="submit">
+                <!-- <a class="btn btn-info mr-2" id='linktotrack'>確定</a> -->
+              {% else %} 
+              <a href="{% url 'member:login'%}">login後可加入追蹤清單</a>
+              {% endif %}
+
+          </td>
+       </tr> </form>         
+    </tbody>
+  </table>
+
+
+
+
+
+{%endblock%} 
+
+{% block script %}   
+<script>
+     
+    $(document).ready(function () {
+      {% if  infosnum.comstocknum == null %}
+      $('#tableid').hide();
+      {% endif %}
+      // $('#buttonid').click(function(){
+      //   $('#tableid').show();
+      // })
+      
+   }) 
+        
+</script>
+{% endblock %}

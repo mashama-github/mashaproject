@@ -1,0 +1,230 @@
+{% extends 'base.html'%} {%block body %}
+
+<form method="post">
+        {% csrf_token %}    
+        <div><p>請輸入三個要比較的公司股票代碼</p>
+            <button type="submit"  name="buttonname" id="buttonid">確定</button>
+            <select id="iditem" name="sitem">
+                <option selected></option>
+                <option>資產負債類</option>
+                <option>損益類</option>
+            </select>
+
+            <select id="idSelecttime" name="stime">
+                    <option selected></option>
+                    <option>FY105</option>
+                    <option>FY104</option>
+                    <option>FY103</option>
+                </select>
+
+            <select id="idSelecttime2" name="stime2">
+                    <option selected></option>
+                    <option>105Q1</option>
+                    <option>105Q2</option>
+                    <option>105Q3</option>
+                    <option>105Q4</option>
+                    <option>106Q1</option>
+                    <option>106Q2</option>
+                    <option>106Q3</option>
+                </select>
+                <input typ="text" name="stock1" id="stockid1" placeholder="請輸入股票代號1">
+                <input typ="text" name="stock2" id="stockid2" placeholder="請輸入股票代號2">
+                <input typ="text" name="stock3" id="stockid3" placeholder="請輸入股票代號3">
+
+                <br>
+                <div id="idSelecttimechild" name="stimecgild">
+                        <input type="checkbox" name="bsrate" value="r03">流動比率
+                        <input type="checkbox" name="bsrate" value="r05">利息保障倍數
+                        <input type="checkbox" name="bsrate" value="r08">存貨週轉率
+                        <input type="checkbox" name="bsrate" value="r12">資產報酬率
+                        <input type="checkbox" name="bsrate" value="r13">權益報酬率
+                        <input type="checkbox" name="bsrate" value="r16">每股盈餘
+                    </div> 
+ 
+                    <!-- <div id="idSelecttimechild22" name="stimecgild22">
+                        <select name="ttest" multiple>
+                            <option  value="r03">流動比率</option>
+                            <option  value="r05">利息保障倍數</option>
+                            <option value="r08">存貨週轉率</option>
+                            <option value="r12">資產報酬率</option>
+                            <option value="r13">權益報酬率</option>
+                            <option value="r16">每股盈餘</option>
+                        </select>
+                        </div> 
+     
+         -->
+        </div>
+</form>
+
+<div id="container11" style="min-width: 310px; height: 400px; margin: 0 auto">
+    </div>
+<div id="container22" style="min-width: 310px; height: 400px; margin: 0 auto">
+        </div>
+    
+
+{%endblock%} 
+
+{% block script %} 
+
+
+<script>
+$(document).ready(function() {  
+            
+    $('#buttonid').click(function () {     
+                //讀出所有被勾選checkbox的值
+                items=[];
+                $(':checked[name="bsrate"]').each(function(){
+                    //var b = $(this).prop("checked")
+                    items.push($(this).val())
+                                     
+                }); 
+
+    //             alert(items)
+    });
+
+
+    //         })
+    
+    $("#idSelecttime2").hide()
+    $("#idSelecttimechild").hide()
+    $("#iditem").change(function(){
+        if ($("#iditem").val()=="資產負債類"){
+            $("#idSelecttime").show()
+            $("#idSelecttimechild").show()
+            $("#idSelecttime2").hide()
+        }
+        else {$("#idSelecttime2").show()
+             $("#idSelecttime").hide()
+             $("#idSelecttimechild").hide()}
+    })
+
+    
+  
+    chart1 = new Highcharts.chart('container11', {
+    chart: {
+        type: 'column'
+    },    
+    title: {        
+        text: '{{sel}}'+'{{selparent}}' 
+    },
+    xAxis:{
+        categories: ['{{rate1}}', '{{rate2}}', '{{rate3}}']
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [
+     
+        {name: ' {{searchnumber1}}'+' {{datas11.ccompanyname}}',
+         data: [{{datas11.comgp}},{{datas11.comnp}},{{datas11.comnbt}}
+               ]},
+
+        {name: ' {{searchnumber2}}'+' {{datas22.ccompanyname}}',
+         data: [{{datas22.comgp}},{{datas22.comnp}},{{datas22.comnbt}}
+                 ]},
+        
+        {name: ' {{searchnumber3}}'+' {{datas33.ccompanyname}}',
+         data: [{{datas33.comgp}},{{datas33.comnp}},{{datas33.comnbt}}           
+                ]},
+   
+    ],    
+
+ 
+   
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+
+
+
+    chart2 = new Highcharts.chart('container22', {
+    chart: {
+        type: 'column'
+    },    
+    title: {        
+        text: '{{sel}}'+'{{selparent}}' 
+    },
+    xAxis:{
+        categories: ['{{rate1}}', '{{rate2}}', '{{rate3}}']
+    },
+
+    credits: {
+        enabled: false
+    },
+
+
+    series: [
+     
+        {name: ' {{searchnumber1}}'+' {{datas11.ccompanyname}}',
+         data: [{{datasa111}},{{datasb111}},{{datasc111}}
+               ]},
+
+        {name: ' {{searchnumber2}}'+' {{datas22.ccompanyname}}',
+         data: [{{datasa222}},{{datasb222}},{{datasc222}}
+                 ]},
+        
+        {name: ' {{searchnumber3}}'+' {{datas33.ccompanyname}}',
+         data: [{{datasa333}},{{datasb333}},{{datasc333}}          
+                ]},
+   
+    ],    
+
+ 
+   
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});   
+
+
+    //   {% if  datas33.comgp != null %}
+    //   $('#container22').hide();
+    //   {% endif %}
+  
+ 
+
+      {% if  datas33.comnbt == null %}
+      $('#container11').hide();    
+     
+      {% endif %}
+
+
+      {% if  datasa333 == null %}
+      $('#container22').hide();    
+      
+      {% endif %}
+
+})
+
+
+  </script>
+{% endblock %}
